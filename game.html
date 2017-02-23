@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>Angular 2048</title>
+    <script src="./bower_components/angular/angular.min.js"></script>
+    <script src="game.app.js"></script>
+    <script src="game.controllers.js"></script>
+    <script src="./bower_components/angular-hotkeys/build/hotkeys.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./bower_components/bootstrap-css-only/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="game.css"></link>
+</head>
+<body ng-app="Angular2048">
+    <div ng-controller="GameCtrl" class="game-container">
+        <div class="grid-container container">
+            <div class="row grid-row" ng-repeat="row in gridRows">
+                <div class="col-md-3 grid-cell" ng-repeat="cell in gridCells">
+                </div>
+            </div>
+        </div>
+        <div class="tile-container">
+            <div class="tile" ng-class="tileClass"></div>
+        </div>
+    </div>
+</body>
+</html>

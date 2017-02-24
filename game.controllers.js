@@ -9,7 +9,20 @@ angular.module('game.controllers')
         function ($scope, $timeout, hotkeys) {
             $scope.gridRows = [1,2,3,4];
             $scope.gridCells = [1,2,3,4];
-            $scope.tileClass = 'tile-1-1';
+            $scope.rowMax = 4;
+            $scope.colMax = 4;
+            $scope.tiles = [
+                {
+                    numberInTile: 2,
+                    row: 1,
+                    col: 1
+                },
+                {
+                    numberInTile: 4,
+                    row: 2,
+                    col: 3
+                }
+            ];
 
             hotkeys.bindTo($scope)
                 .add({
@@ -17,11 +30,11 @@ angular.module('game.controllers')
                     description: 'Move tiles right',
                     callback: function (event) {
                         event.preventDefault();
-                        var row = $scope.tileClass.split('-')[1];
-                        var col = $scope.tileClass.split('-')[2];
-                        if (col < 4) {
-                            $scope.tileClass = 'tile-' + row + '-' + (++col);
-                        }
+                        $scope.tiles.forEach(function (tile) {
+                            if (tile.col < $scope.colMax) {
+                                ++tile.col;
+                            }
+                        });
                     }
                 })
                 .add({
@@ -29,11 +42,11 @@ angular.module('game.controllers')
                     description: 'Move tiles left',
                     callback: function (event) {
                         event.preventDefault();
-                        var row = $scope.tileClass.split('-')[1];
-                        var col = $scope.tileClass.split('-')[2];
-                        if (col > 1) {
-                            $scope.tileClass = 'tile-' + row + '-' + (--col);
-                        }
+                        $scope.tiles.forEach(function (tile) {
+                            if (tile.col > 1) {
+                                --tile.col;
+                            }
+                        });
                     }
                 })
                 .add({
@@ -41,11 +54,11 @@ angular.module('game.controllers')
                     description: 'Move tiles up',
                     callback: function (event) {
                         event.preventDefault();
-                        var row = $scope.tileClass.split('-')[1];
-                        var col = $scope.tileClass.split('-')[2];
-                        if (row > 1) {
-                            $scope.tileClass = 'tile-' + (--row) + '-' + col;
-                        }
+                        $scope.tiles.forEach(function (tile) {
+                            if (tile.row > 1) {
+                                --tile.row;
+                            }
+                        });
                     }
                 })
                 .add({
@@ -53,11 +66,11 @@ angular.module('game.controllers')
                     description: 'Move tiles down',
                     callback: function (event) {
                         event.preventDefault();
-                        var row = $scope.tileClass.split('-')[1];
-                        var col = $scope.tileClass.split('-')[2];
-                        if (row < 4) {
-                            $scope.tileClass = 'tile-' + (++row) + '-' + col;
-                        }
+                        $scope.tiles.forEach(function (tile) {
+                            if (tile.row < $scope.rowMax) {
+                                ++tile.row;
+                            }
+                        });
                     }
                 })
         }
